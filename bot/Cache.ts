@@ -3,19 +3,20 @@ import ms from "ms";
 import { type Presence } from "eris";
 
 const cache = new Cache();
-const key = "data";
 const expire = ms("12h") / 1000; 
 
-function set<R>(data: R) {
+type Key = "user" | "presence";
+
+function set<R>(key: Key, data: R) {
   return cache.set(key, data, expire);
 };
 
-function reset() {
+function reset(key: Key) {
   cache.del(key);
   return cache.set(key, null);
 };
 
-function get() {
+function get(key: Key) {
   return cache.get<Presence | null>(key);
 };
 

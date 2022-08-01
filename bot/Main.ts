@@ -32,7 +32,7 @@ bot.on("guildCreate", (guild: Guild) => {
 
   let personnel = guild.members.get(ownerID);
   if (personnel && personnel.activities?.length) {
-    return Cache.set(personnel.activities);
+    return Cache.set("presence", personnel.activities);
   } else {
     return;
   };
@@ -44,10 +44,10 @@ bot.on("presenceUpdate", (member: Member, _) => {
 
   // no activities
   if (!member?.activities?.length) {
-    return Cache.reset();
+    return Cache.reset("presence", );
   };
 
-  return Cache.set(member.activities);
+  return Cache.set("presence", member.activities);
 });
 
 bot

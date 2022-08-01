@@ -59,8 +59,11 @@ app
 app.set("env", "production").disable("etag").set("title", "API for 13373333.one");
 
 app
-.get("/discord", (req, res) => {
-  const data = Cache.get();
+.get("/user", (req, res) => {
+
+})
+.get("/presence", (req, res) => {
+  const data = Cache.get("presence");
   if (data) {
     return res.set({"content-type": "application/json"}).status(200).send(data);
   } else {
