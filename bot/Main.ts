@@ -16,14 +16,15 @@ const token = envConfig.parsed["TOKEN"];
 
 const bot = new Client(`Bot ${token}`, {
   intents: ["guilds", "guildPresences", "guildMembers"],
-  getAllUsers: true
+  getAllUsers: true,
+  restMode: true
 });
 
 bot.on("ready", async () => {
   console.log("Bot: Connected.");
 
   try {
-    let ownerContent = await bot.getRESTUser(ownerID).catch(() => {});
+    let ownerContent = await bot.getRESTUser(ownerID);
     if (ownerContent) {
       Cache.set("user", ownerContent.toJSON());
     } else {
