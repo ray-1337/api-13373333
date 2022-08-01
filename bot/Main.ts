@@ -46,4 +46,8 @@ bot.on("presenceUpdate", (member: Member, _) => {
   return Cache.set(member.activities);
 });
 
+bot
+.on("error", console.error)
+.on("warn", console.warn);
+
 export default bot.connect();
