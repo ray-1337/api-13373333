@@ -19,8 +19,12 @@ const bot = new Client(`Bot ${token}`, {
   getAllUsers: true
 });
 
+let fired: boolean = false;
+
 bot.on("ready", () => {
+  if (fired) return;
   console.log("Bot: Connected.");
+  return fired = true;
 });
 
 bot.on("guildCreate", (guild: Guild) => {
