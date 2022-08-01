@@ -60,15 +60,12 @@ app.set("env", "production").disable("etag").set("title", "API for 13373333.one"
 
 app
 .get("/user", (req, res) => {
-
+  const data = Cache.get("user"), resp = res.set({"content-type": "application/json"}).status(200);
+  return data ? resp.send(data) : resp.send("null");
 })
 .get("/presence", (req, res) => {
-  const data = Cache.get("presence");
-  if (data) {
-    return res.set({"content-type": "application/json"}).status(200).send(data);
-  } else {
-    return res.set({"content-type": "application/json"}).status(200).send("null");
-  };
+  const data = Cache.get("presence"), resp = res.set({"content-type": "application/json"}).status(200);
+  return data ? resp.send(data) : resp.send("null");
 })
 .get("/alive", (req, res) => {
   return res.status(200).send("Yes, it's alive.");

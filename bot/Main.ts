@@ -19,12 +19,20 @@ const bot = new Client(`Bot ${token}`, {
   getAllUsers: true
 });
 
-let fired: boolean = false;
-
-bot.on("ready", () => {
-  if (fired) return;
+bot.on("ready", async () => {
   console.log("Bot: Connected.");
-  return fired = true;
+
+  try {
+    let ownerContent = await bot.getRESTUser(ownerID).catch(() => {});
+    if (ownerContent) {
+      Cache.set("user", ownerContent.toJSON());
+    } else {
+      Cache.set("user", null);
+    };
+  } catch (error) {
+    console.error(error);
+    return;
+  };
 });
 
 bot.on("guildCreate", (guild: Guild) => {
