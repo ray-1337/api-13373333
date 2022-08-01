@@ -10,9 +10,6 @@ const envConfig = dotenvConfig({path});
 const app = Express();
 
 const CORSOptions = CORS({
-  // "origin": /^(https:\/\/(www\.)?)?((backend|testing)\.)?cdev\.shop/gi,
-  // "origin": ["https://cdev.shop", "https://backend.cdev.shop", "https://testing.cdev.shop"],
-  // "origin": /^(https?:\/\/(www\.)?)?((backend|testing)\.)?cdev\.shop/,
   "origin": "13373333.one",
   "methods": ["GET", "OPTIONS"],
   "optionsSuccessStatus": 200,
